@@ -1,26 +1,26 @@
 package com.trade.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Data
+@Table(name = "users")
+public class UserEntity extends BaseEntity{
+
     private String name;
+    @Column (unique = true)
     private String email;
+    @Column (unique = true)
     private String phone;
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<AdEntity> adEntities;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles;
 
 }

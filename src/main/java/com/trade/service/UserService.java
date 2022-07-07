@@ -6,16 +6,22 @@ import com.trade.exception.NoUserFoundException;
 import com.trade.exception.NoUsersFoundException;
 import com.trade.exception.UserAlreadyExistsException;
 import com.trade.repository.UserRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserService {
 
+    private final UserRepo userRepo;
+
     @Autowired
-    UserRepo userRepo;
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     public List<UserEntity> getAllUsers() throws NoUsersFoundException {
         List<UserEntity> users = userRepo.findAll();

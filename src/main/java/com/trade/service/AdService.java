@@ -14,11 +14,14 @@ import java.util.List;
 @Service
 public class AdService {
 
-    @Autowired
-    AdRepo adRepo;
+    private final AdRepo adRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    UserRepo userRepo;
+    public AdService(AdRepo adRepo, UserRepo userRepo) {
+        this.adRepo = adRepo;
+        this.userRepo = userRepo;
+    }
 
     public List<AdEntity> getAllAds() {
         return adRepo.findAll();

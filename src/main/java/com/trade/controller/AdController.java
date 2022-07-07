@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/ads")
 public class AdController {
 
+    private final AdService adService;
+
     @Autowired
-    AdService adService;
+    public AdController(AdService adService) {
+        this.adService = adService;
+    }
 
     @GetMapping
     public ResponseEntity getAllAds(){

@@ -6,7 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 @Table(name = "ads")
 public class AdEntity extends BaseEntity {
 

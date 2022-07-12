@@ -1,6 +1,6 @@
 package com.trade.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Role{
     private Long id;
     private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private List<UserEntity> users;
 }
 

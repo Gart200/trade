@@ -1,6 +1,8 @@
 package com.trade.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -8,17 +10,19 @@ import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
+    @CreationTimestamp
     private Date created;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     private Date updated;
 
 }

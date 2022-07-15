@@ -4,6 +4,7 @@ import com.trade.dto.AuthRequestDto;
 import com.trade.entity.UserEntity;
 import com.trade.exception.UserAlreadyExistsException;
 import com.trade.security.JwtTokenProvider;
+import com.trade.service.AdServiceImpl;
 import com.trade.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +26,14 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserServiceImpl userService;
 
+    private final AdServiceImpl adService;
+
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserServiceImpl userService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserServiceImpl userService, AdServiceImpl adService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
+        this.adService = adService;
     }
 
     @PostMapping("/register")
@@ -65,6 +66,16 @@ public class AuthController {
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e){
             throw new BadCredentialsException("Invalid username or password");
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity getAllAds(){
+        try {
+            return ResponseEntity.ok(adService.getAllAds());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("Что-то пошло не так");
         }
     }
 

@@ -19,6 +19,4 @@ public class AdEntity extends BaseEntity {
     @JsonIgnore
     @ManyToOne
     private UserEntity user;
-
-
 }

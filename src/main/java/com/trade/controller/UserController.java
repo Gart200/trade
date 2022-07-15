@@ -60,7 +60,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/ad")
     public ResponseEntity addAd(@RequestParam Long user, @RequestBody AdEntity ad){
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();

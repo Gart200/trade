@@ -3,11 +3,15 @@ package com.trade.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.trade.entity.AdEntity;
 import com.trade.entity.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 

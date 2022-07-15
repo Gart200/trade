@@ -41,8 +41,8 @@ public class AdServiceImpl {
         UserEntity user = userRepo.findById(id).orElse(null);
         if (user == null) throw new NoUserFoundException(id);
 
-        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
-        if (sender.getId() != id) throw new NotEnoughRights();
+        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        //if (sender.getId() != id) throw new NotEnoughRights();
 
         newAd.setUser(user);
         return adRepo.save(newAd);

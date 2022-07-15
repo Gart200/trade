@@ -69,9 +69,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public Long deleteUser (Long id, Authentication authentication) throws NotEnoughRights {
-        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
 
-        if (sender.getId() != id) throw new NotEnoughRights();
+        //if (sender.getId() != id) throw new NotEnoughRights();
         userRepo.deleteById(id);
 
         return id;
@@ -85,8 +85,8 @@ public class UserServiceImpl implements UserService {
         UserEntity oldUser = userRepo.findById(newUser.getId()).orElse(null);
         if (oldUser == null) throw new NoUserFoundException(newUser.getId());
 
-        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
-        if (sender.getId() != newUser.getId()) throw new NotEnoughRights();
+        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        //if (sender.getId() != newUser.getId()) throw new NotEnoughRights();
 
         userRepo.save(newUser);
         return newUser;

@@ -41,8 +41,8 @@ public class AdServiceImpl {
         UserEntity user = userRepo.findById(id).orElse(null);
         if (user == null) throw new NoUserFoundException(id);
 
-        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
-        //if (sender.getId() != id) throw new NotEnoughRights();
+        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        if (sender.getId() != id) throw new NotEnoughRights();
 
         newAd.setUser(user);
         return adRepo.save(newAd);
@@ -58,8 +58,8 @@ public class AdServiceImpl {
 
         AdEntity ad = adRepo.findById(id).orElse(null);
 
-        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
-        //if (sender.getId() != ad.getUser().getId()) throw new NotEnoughRights();
+        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        if (sender.getId() != ad.getUser().getId()) throw new NotEnoughRights();
 
         adRepo.deleteById(id);
         return id;
@@ -76,8 +76,8 @@ public class AdServiceImpl {
         AdEntity oldAd = adRepo.findById(newAd.getId()).orElse(null);
         if (oldAd == null) throw new NoAdFoundException(newAd.getId());
 
-        //UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
-        //if (sender.getId() != oldAd.getUser().getId()) throw new NotEnoughRights();
+        UserEntity sender = userRepo.findByEmail(((UserDetails) authentication.getPrincipal()).getUsername());
+        if (sender.getId() != oldAd.getUser().getId()) throw new NotEnoughRights();
 
         newAd.setUser(oldAd.getUser());
         adRepo.save(newAd);
